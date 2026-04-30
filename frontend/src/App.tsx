@@ -2,6 +2,7 @@ import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 import Search from './Components/Search/Search';
 import { CompanySearch } from '../company';
 import { searchCompanies } from './api';
+import CardList from './Components/CardList/CardList';
 
 function App() {
 
@@ -27,7 +28,9 @@ function App() {
   return (
     <div className="App">
       <Search onClick = {onClick} search={search} handleChange={handleChange}/>
-      {serverError && <p>{serverError}</p>}
+      <CardList searchResults={searchResult}/>
+      {serverError && <div>Unablel to connect to API</div>}
+      {/* {serverError && <p>{serverError}</p>} */}
     </div>
   );
 }

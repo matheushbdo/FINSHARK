@@ -8,7 +8,7 @@ interface SearchResponse {
 export const searchCompanies = async (query: string): Promise<SearchResponse | string> => {
     try {
         const response = await axios.get<SearchResponse>(
-            `https://api.twelvedata.com/price?symbol=AAPL&apikey=${process.env.REACT_APP_API_KEY}`
+            `https://financialmodelingprep.com/stable/search-symbol?query=AAPL&apikey=${process.env.REACT_APP_API_KEY}`
         );
         return response.data;
     } catch (error) {
