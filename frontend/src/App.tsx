@@ -1,22 +1,33 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+import  { ChangeEvent, SyntheticEvent, useState } from 'react';
 import Search from './Components/Search/Search';
-import { CompanySearch } from '../company';
+import { CompanySearch } from './company';
 import { searchCompanies } from './api';
 import CardList from './Components/CardList/CardList';
+import ListPorfolio from './Components/Portifolio/ListPortfolio/ListPorfolio';
 
 function App() {
 
   const [search, setSearch] = useState<string>("")
   const [portfolioValues, setPortfolioValues] = useState<string[]>([])
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([])
-  const [serverError, setServerError] = useState<string>("")
+  const [serverError, setServerError] = useState<string | null>(null)
     
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
+  const handleSearchChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearch(value)
+    if (!value) return setSearchResult([])
+    const result = await searchCompanies(value)
+    if (typeof result === "string") {
+      setServerError(result)
+    } else if (Array.isArray(result.data)) {
+      setSearchResult(result.data)
+    }
   }
 
   const onPortfolioCreate = (e: any) => {
     e.preventDefault()
+    const exists = portfolioValues.find((value) => value === e.target[0].value) 
+    if(exists)  return 
     const updatedPortifolio = [...portfolioValues, e.target[0].value]
     setPortfolioValues(updatedPortifolio)
   }
@@ -27,10 +38,9 @@ function App() {
 
     if (typeof result === "string") {
       setServerError(result)
-    } else if (result && Array.isArray(result.data)) {
+    } else if (Array.isArray(result.data)) {
       setSearchResult(result.data)
     }
-    console.log(searchResult)
   }   
   return (
     <div className="App">
@@ -39,6 +49,8 @@ function App() {
         search={search} 
         handleSearchChange={handleSearchChange}
       />
+
+      <ListPorfolio portfolioValues={portfolioValues}/>
       <CardList 
         searchResults={searchResult} 
         onPortfolioCreate={onPortfolioCreate}

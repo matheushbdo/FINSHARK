@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 console.log('teste')
-console.log(searchCompanies("tsla"));
+console.log(searchCompanies("aapl"));
 
 root.render(
   <React.StrictMode>

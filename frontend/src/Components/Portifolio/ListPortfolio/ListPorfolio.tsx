@@ -1,5 +1,22 @@
-function a(){
-    <div></div>
+import React from 'react'
+import CardPortfolio from '../CardPortfolio/CardPortfolio'
+
+interface Props {
+    portfolioValues: string[] 
 }
 
-export default a
+const ListPorfolio = ({ portfolioValues }: Props) => {
+  return (
+    <>
+        <h3>My Portifolio</h3>
+        <ul>
+            {portfolioValues &&
+                portfolioValues.map((portfolioValue) => {
+                    return <CardPortfolio portfolioValue={portfolioValue}/>
+            })}
+        </ul>
+    </>
+  )
+}
+
+export default ListPorfolio

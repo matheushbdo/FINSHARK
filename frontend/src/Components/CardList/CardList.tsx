@@ -1,6 +1,6 @@
 import React, { JSX, SyntheticEvent } from "react";
 import Card from "../Card/Card";
-import { CompanySearch } from "../../../company";
+import { CompanySearch } from "../../company";
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -13,13 +13,15 @@ const CardList: React.FC<Props> = ({ searchResults, onPortfolioCreate }: Props):
   return (
     <>
       {searchResults?.length > 0 ? (
-        searchResults.map((result) => (
-          <Card 
-          id={result.symbol}
-          key={uuidv4()}
-          searchResult={result} 
-          onPortfolioCreate={onPortfolioCreate} />
-        ))
+        searchResults.map((result) => {
+          return(
+            <Card 
+              id={result.symbol}
+              key={uuidv4()}
+              searchResult={result} 
+              onPortfolioCreate={onPortfolioCreate} />
+          )
+        })  
       ) : (
         <h1>No results</h1>
       )}

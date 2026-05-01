@@ -1,6 +1,7 @@
 import React, { JSX, SyntheticEvent } from 'react'
-import { CompanySearch } from '../../../company';
-import AddPortfolio from '../Portifolio/AddPortifolio/AddPortfolio';
+import "./Card.css"
+import { CompanySearch } from '../../company';
+import AddPortfolio from '../Portifolio/AddPortfolio/AddPortfolio';
 
 interface Props {
   id: string;
@@ -15,7 +16,9 @@ const Card: React.FC<Props> = ({ id, searchResult, onPortfolioCreate }: Props): 
         alt="company logo"
       />
       <div className="details">
-        <h2>{searchResult.name} {searchResult.symbol}</h2>
+        <h2>
+          {searchResult.name} ({searchResult.symbol})
+        </h2>
         <p>${searchResult.currency}</p>
       </div>
       <p className="info">
