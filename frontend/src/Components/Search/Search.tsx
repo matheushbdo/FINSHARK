@@ -20,6 +20,6 @@ const Search: React.FC<Props> = ({
         </form>
      </div>
     )
-}
+} 
 
 export default Search
