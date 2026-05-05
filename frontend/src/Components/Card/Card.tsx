@@ -19,7 +19,7 @@ const Card: React.FC<Props> = ({ id, searchResult, onPortfolioCreate }: Props): 
     >
       <Link to={`/company/${searchResult.symbol}`} className="font-bold text-center text-black md:text-left">
         {searchResult.name} ({searchResult.symbol})
-      </h2>
+      </Link>
       <p className="text-black">{searchResult.currency}</p>
       <p className="font-bold text-black">
         {searchResult.exchangeShortName} - {searchResult.stockExchange}
