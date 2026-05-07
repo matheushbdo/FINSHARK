@@ -3,7 +3,6 @@ import { useOutletContext } from "react-router-dom";
 import Table from "../Table/Table";
 import { CompanyIncomeStatement } from "../../company";
 import { getIncomeStatement } from "../../api";
-import Spinner from "../Spinners/Spinner";
 
 type Props = {}
 
@@ -98,31 +97,4 @@ function formatLargeMonetaryNumber(revenue: number) {
 function formatRatio(netIncomeRatio: number) {
     throw new Error('Function not implemented.');
 }
-    function formatLargeMonetaryNumber(revenue: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatRatio(netIncomeRatio: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatLargeMonetaryNumber(depreciationAndAmortization: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatLargeMonetaryNumber(revenue: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatRatio(netIncomeRatio: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatLargeMonetaryNumber(revenue: number) {
-        throw new Error('Function not implemented.');
-    }
-
-    function formatRatio(netIncomeRatio: number) {
-        throw new Error('Function not implemented.');
-    }
 

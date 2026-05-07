@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, JSX } from 'react'
 import { CompanyBalanceSheet } from '../../company';
 import { useOutletContext } from 'react-router';
 import { getBalanceSheet } from '../../api';
@@ -75,28 +75,43 @@ const config = [
 ];
 
 
-const BalanceSheet = (props: Props) => {
+const BalanceSheet = (props: Props): JSX.Element => {
     const ticker = useOutletContext<string>();
-    const [balanceSheetData, setBalanceSheetData] = useState<CompanyBalanceSheet>();
+    const [balanceSheetData, setBalanceSheetData] = useState<CompanyBalanceSheet | null>(null);
+
     useEffect(() => {
         const getData = async () => {
             const value = await getBalanceSheet(ticker);
-            setBalanceSheetData(value?.data[0]);
+            setBalanceSheetData(value?.data[0] ?? null);
         };
         getData();
-    }, []);
-  return <>
-    {BalanceSheet()  ? (
-        <RatioList config={config} data={balanceSheetData}/>
-    ) : (
-        <h1>Company not found</h1>
-    )};
-    </>;
-  
+    }, [ticker]);
+
+    return (
+      <>
+        {balanceSheetData ? (
+          <RatioList config={config} data={balanceSheetData} />
+        ) : (
+          <h1>Company not found</h1>
+        )}
+      </>
+    );
 }
 
-export default BalanceSheet
+export default BalanceSheet;
 
-function formatLargeMonetaryNumber(longTermDebt: any) {
-    throw new Error('Function not implemented.');
+function formatLargeMonetaryNumber(value: number | string | undefined | null) {
+    if (value === undefined || value === null || value === "") {
+      return "-";
+    }
+
+    const number = typeof value === "string" ? Number(value) : value;
+    if (Number.isNaN(number)) {
+      return "-";
+    }
+
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
 }

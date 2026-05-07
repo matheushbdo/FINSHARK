@@ -1,11 +1,11 @@
 
 type Props = {
-    configs: any;
-    data: any;
+    config: any[];
+    data: any[];
 };
 
 
-const Table = (config: any[], data: any[]) => {
+const Table = ({ config, data }: Props) => {
     const renderedRows = data.map((company) => {
   return (
     <tr key={company.cik}>
