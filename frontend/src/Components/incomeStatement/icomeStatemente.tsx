@@ -83,7 +83,8 @@ const IncomeStatement = (props: Props) => {
         }; 
         incomeStatement();
     }, []);
-  return <>{incomeStatementData ? <><Table config={configs} data={incomeStatementData} /></> : <>Loading...</>}</>
+  return <>{incomeStatementData ? <><Table config={configs} data={incomeStatementData} />
+  </> : <Spinner />}</>
   
 };
 

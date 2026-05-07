@@ -1,10 +1,16 @@
-import React, { useState, useEffect, JSX } from 'react'
-import { CompanyBalanceSheet } from '../../company';
-import { useOutletContext } from 'react-router';
-import { getBalanceSheet } from '../../api';
-import RatioList from '../RatioList/RatioList';
+import React, { useEffect, useState } from "react";
+import { CompanyBalanceSheet } from "../../company";
+import { useOutletContext } from "react-router-dom";
+import RatioList from "../RatioList/RatioList";
+import { getBalanceSheet } from "../../api";
+import Table from "../Table/Table";
+import Spinner from "../Spinners/Spinner";
+import {
+  formatLargeMonetaryNumber,
+  formatLargeNonMonetaryNumber,
+} from "../../Helpers/NumberFormatting";
 
-type Props = {}
+type Props = {};
 
 const config = [
   {
@@ -74,44 +80,25 @@ const config = [
   },
 ];
 
-
-const BalanceSheet = (props: Props): JSX.Element => {
-    const ticker = useOutletContext<string>();
-    const [balanceSheetData, setBalanceSheetData] = useState<CompanyBalanceSheet | null>(null);
-
-    useEffect(() => {
-        const getData = async () => {
-            const value = await getBalanceSheet(ticker);
-            setBalanceSheetData(value?.data[0] ?? null);
-        };
-        getData();
-    }, [ticker]);
-
-    return (
-      <>
-        {balanceSheetData ? (
-          <RatioList config={config} data={balanceSheetData} />
-        ) : (
-          <h1>Company not found</h1>
-        )}
-      </>
-    );
-}
+const BalanceSheet = (props: Props) => {
+  const ticker = useOutletContext<string>();
+  const [companyData, setCompanyData] = useState<CompanyBalanceSheet>();
+  useEffect(() => {
+    const getCompanyData = async () => {
+      const value = await getBalanceSheet(ticker!);
+      setCompanyData(value?.data[0]);
+    };
+    getCompanyData();
+  }, []);
+  return (
+    <>
+      {companyData ? (
+        <RatioList config={config} data={companyData} />
+      ) : (
+        <Spinner />
+      )}
+    </>
+  );
+};
 
 export default BalanceSheet;
-
-function formatLargeMonetaryNumber(value: number | string | undefined | null) {
-    if (value === undefined || value === null || value === "") {
-      return "-";
-    }
-
-    const number = typeof value === "string" ? Number(value) : value;
-    if (Number.isNaN(number)) {
-      return "-";
-    }
-
-    return number.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-}

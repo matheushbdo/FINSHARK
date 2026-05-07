@@ -586,3 +586,9 @@ export interface CompanyCashFlow {
   link: string;
   finalLink: string;
 }
+
+export interface CompanyCompData {
+  
+  symbol: string;
+ peersList: string[];
+}
