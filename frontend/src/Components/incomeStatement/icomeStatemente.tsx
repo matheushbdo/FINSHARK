@@ -7,7 +7,7 @@ import { getIncomeStatement } from "../../api";
 type Props = {}
 
 const configs = [
-  {
+ {
     label: "Date",
     render: (company: CompanyIncomeStatement) => company.date,
   },

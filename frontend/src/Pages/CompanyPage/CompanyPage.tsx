@@ -30,10 +30,10 @@ const CompanyPage = (props: Props) => {
        <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
         <Sidebar />
         <CompanyDashboard ticker={ticker!}>
-          <Tile title="Company name" subTitle={company.companyName} />
+          <Tile title="Company name" subTitle={"$" + company.companyName} />
           <Tile title="Price" subTitle={company.price?.toString()} />
           <Tile title="Sector" subTitle={company.sector} />
-          <Tile title="DCF" subTitle={company.dcf.toString() } />
+          <Tile title="DCF" subTitle={"$" + company.dcf.toString() } />
           <CompFinder ticker={company.symbol} />
           <TenKFinder ticker={company.symbol} />
         </CompanyDashboard>

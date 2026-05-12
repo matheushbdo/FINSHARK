@@ -4,13 +4,18 @@ import { useOutletContext } from 'react-router';
 import { getKeyMetrics } from '../../api';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';
+import { 
+  formatLargeNonMonetaryNumber,
+  formatRatio
+} from '../../Helpers/NumberFormatting';
 
-interface Props {}
+type Props = {};
 
 const tableConfig = [
-  {
+   {
     label: "Market Cap",
-    render: (company: CompanyKeyMetrics) => company.marketCapTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeNonMonetaryNumber(company.marketCapTTM),
     subTitle: "Total value of all a company's shares of stock",
   },
   {

@@ -7,11 +7,7 @@ import Spinner from '../Spinner/Spinner';
 type Props = {}
 
 const config = [
-  {
-    label: "Date",
-    render: (company: CompanyCashFlow) => company.date,
-  },
-  {
+    {
     label: "Operating Cashflow",
     render: (company: CompanyCashFlow) =>
       formatLargeMonetaryNumber(company.operatingCashFlow),

@@ -13,7 +13,7 @@ import {
 type Props = {};
 
 const config = [
-  {
+ {
     label: <div className="font-bold">Total Assets</div>,
     render: (company: CompanyBalanceSheet) =>
       formatLargeMonetaryNumber(company.totalAssets),
